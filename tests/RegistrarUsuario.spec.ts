@@ -1,4 +1,4 @@
-import RegistrarUsuarioUseCase from "../src/RegistrarUsuario";
+import { RegistrarUsuarioUseCase } from "../src/RegistrarUsuario";
 
 test("Deve ser possível registrar um usuário", () => {
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase();

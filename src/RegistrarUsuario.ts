@@ -1,8 +1,12 @@
-export default class RegistrarUsuarioUseCase {
-  usuarios: any[] = [];
+import { BancoDadosEmMemoria } from "./BancoDadosEmMemoria";
+import { InverterSenha } from "./InverterSenha";
+
+export class RegistrarUsuarioUseCase {
+  private bancoDados = new BancoDadosEmMemoria();
+  private inverterSenha = new InverterSenha();
 
   executar(nome: string, email: string, senha: string) {
-    const senhaFake = senha.split("").reverse().join("");
+    const senhaFake = this.inverterSenha.criptografar(senha);
 
     const usuario = {
       id: Math.random(),
@@ -11,7 +15,7 @@ export default class RegistrarUsuarioUseCase {
       senha: senhaFake
     };
 
-    this.usuarios.push(usuario);
+    this.bancoDados.inserir(usuario);
 
     return usuario;
   }
