@@ -1,9 +1,10 @@
-import { BancoDadosEmMemoria } from "./BancoDadosEmMemoria";
+import { IColecao } from "./IColecao";
 import { InverterSenha } from "./InverterSenha";
 
 export class RegistrarUsuarioUseCase {
-  private bancoDados = new BancoDadosEmMemoria();
   private inverterSenha = new InverterSenha();
+
+  constructor(private colecao: IColecao) {}
 
   executar(nome: string, email: string, senha: string) {
     const senhaFake = this.inverterSenha.criptografar(senha);
@@ -15,7 +16,7 @@ export class RegistrarUsuarioUseCase {
       senha: senhaFake
     };
 
-    this.bancoDados.inserir(usuario);
+    this.colecao.inserir(usuario);
 
     return usuario;
   }
