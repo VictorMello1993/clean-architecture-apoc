@@ -1,7 +1,7 @@
-import { IColecao } from "./IColecao";
+import { IColecao } from "../portas/IColecao";
 
 export class BancoDadosEmMemoria implements IColecao {
-  static itens: any[] = [];
+  private static itens: any[] = [];
 
   inserir(item: any) {
     BancoDadosEmMemoria.itens.push(item);
