@@ -1,4 +1,4 @@
-import { InverterSenha } from "../adaptadores/InverterSenha";
+import { InverterSenha } from "../adaptadores/auth/InverterSenha";
 import { IColecao } from "../portas/IColecao";
 import { ICriptografiaProvider } from "../portas/ICriptografiaProvider";
 

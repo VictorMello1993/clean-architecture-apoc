@@ -1,4 +1,4 @@
-import { IColecao } from "../portas/IColecao";
+import { IColecao } from "../../portas/IColecao";
 
 export class BancoDadosEmMemoria implements IColecao {
   private static itens: any[] = [];

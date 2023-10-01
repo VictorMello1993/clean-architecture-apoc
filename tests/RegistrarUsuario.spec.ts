@@ -1,7 +1,8 @@
-import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/SenhaComEspacos";
-import { InverterSenha } from "./../src/app/exemplo/adaptadores/InverterSenha";
-import { BancoDadosEmMemoria } from "./../src/app/exemplo/adaptadores/BancoDadosEmMemoria";
-import { RegistrarUsuarioUseCase } from "../src/RegistrarUsuario";
+import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/auth/SenhaComEspacos";
+import { InverterSenha } from "./../src/app/exemplo/adaptadores/auth/InverterSenha";
+import { BancoDadosEmMemoria } from "./../src/app/exemplo/adaptadores/db/BancoDadosEmMemoria";
+import { RegistrarUsuarioUseCase } from "./../src/app/exemplo/usuario/RegistrarUsuario";
+
 import { IColecao } from "../src/app/exemplo/portas/IColecao";
 
 test("Deve ser possível registrar um usuário invertendo a senha", () => {
