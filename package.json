@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",    
+    "build": "tsc",
     "migrate:make": "knex migrate:make --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js --knexpath ./src/app/exemplo/adaptadores/db/knex",
     "migrate:up": "knex migrate:latest --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js",
     "migrate:down": "knex migrate:rollback --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js"
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.3",
+    "@types/uuid": "^9.0.4",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "eslint": "^8.46.0",

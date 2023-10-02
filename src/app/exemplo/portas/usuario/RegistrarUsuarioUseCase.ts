@@ -1,3 +1,4 @@
+import { BaseId } from "../../../shared/BaseId";
 import { InverterSenha } from "../../adaptadores/auth/InverterSenha";
 import { IColecaoUsuario } from "./IColecaoUsuario";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
@@ -16,7 +17,7 @@ export class RegistrarUsuarioUseCase {
     const senhaCriptografada = this.criptografiaProvider.criptografar(senha);
 
     const usuario: Usuario = {
-      id: `${Math.random()}`,
+      id: BaseId.gerar(),
       nome,
       email,
       senha: senhaCriptografada

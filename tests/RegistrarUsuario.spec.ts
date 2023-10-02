@@ -1,3 +1,4 @@
+import { ColecaoUsuarioDB } from "./../src/app/exemplo/adaptadores/db/knex/ColecaoUsuarioDB";
 import { BcryptAdapter } from "./../src/app/exemplo/adaptadores/auth/BcryptAdapter";
 import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/auth/SenhaComEspacos";
 import { InverterSenha } from "./../src/app/exemplo/adaptadores/auth/InverterSenha";
@@ -31,6 +32,18 @@ test("Deve ser possível registrar um usuário com senha com espaços", () => {
 
 test("Deve ser possível registrar um usuário com senha criptografada", () => {
   const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const criptografiaProvider = new BcryptAdapter();
+  const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
+
+  const usuario = registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+
+  expect(usuario).toHaveProperty("id");
+  expect(usuario.nome).toBe("Victor Mello");
+  expect(criptografiaProvider.comparar("123456", usuario.senha!)).toBeTruthy();
+});
+
+test("Deve ser possível registrar um usuário no banco real", () => {
+  const colecao: IColecaoUsuario = new ColecaoUsuarioDB();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
