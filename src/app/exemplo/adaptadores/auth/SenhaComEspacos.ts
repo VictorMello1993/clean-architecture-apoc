@@ -1,4 +1,4 @@
-import { ICriptografiaProvider } from "../../portas/ICriptografiaProvider";
+import { ICriptografiaProvider } from "../../usuario/ICriptografiaProvider";
 
 export class SenhaComEspacos implements ICriptografiaProvider {
   criptografar(senha: string): string {

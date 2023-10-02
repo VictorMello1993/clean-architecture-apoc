@@ -1,12 +1,12 @@
 import { BcryptAdapter } from "./../src/app/exemplo/adaptadores/auth/BcryptAdapter";
 import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/auth/SenhaComEspacos";
 import { InverterSenha } from "./../src/app/exemplo/adaptadores/auth/InverterSenha";
-import { BancoDadosEmMemoria } from "./../src/app/exemplo/adaptadores/db/BancoDadosEmMemoria";
-import { RegistrarUsuarioUseCase } from "./../src/app/exemplo/usuario/RegistrarUsuario";
-import { IColecao } from "../src/app/exemplo/portas/IColecao";
+import { UsuarioEmMemoria } from "./../src/app/exemplo/adaptadores/db/UsuarioEmMemoria";
+import { RegistrarUsuarioUseCase } from "./../src/app/exemplo/usuario/RegistrarUsuarioUseCase";
+import { IColecaoUsuario } from "../src/app/exemplo/usuario/IColecaoUsuario";
 
 test("Deve ser possível registrar um usuário invertendo a senha", () => {
-  const colecao: IColecao = new BancoDadosEmMemoria();
+  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
   const criptografiaProvider = new InverterSenha();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -18,7 +18,7 @@ test("Deve ser possível registrar um usuário invertendo a senha", () => {
 });
 
 test("Deve ser possível registrar um usuário com senha com espaços", () => {
-  const colecao: IColecao = new BancoDadosEmMemoria();
+  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
   const criptografiaProvider = new SenhaComEspacos();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -30,7 +30,7 @@ test("Deve ser possível registrar um usuário com senha com espaços", () => {
 });
 
 test("Deve ser possível registrar um usuário com senha criptografada", () => {
-  const colecao: IColecao = new BancoDadosEmMemoria();
+  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 

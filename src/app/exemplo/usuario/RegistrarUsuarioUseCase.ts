@@ -1,6 +1,6 @@
 import { InverterSenha } from "../adaptadores/auth/InverterSenha";
-import { IColecao } from "../portas/IColecao";
-import { ICriptografiaProvider } from "../portas/ICriptografiaProvider";
+import { IColecaoUsuario } from "./IColecaoUsuario";
+import { ICriptografiaProvider } from "./ICriptografiaProvider";
 import { Usuario } from "./Usuario";
 
 export class RegistrarUsuarioUseCase {
@@ -8,7 +8,7 @@ export class RegistrarUsuarioUseCase {
 
   constructor(
     // Aqui descrevem o conceito de porta na Arquitetura Hexagonal
-    private colecao: IColecao,
+    private colecao: IColecaoUsuario,
     private criptografiaProvider: ICriptografiaProvider
   ) {}
 
