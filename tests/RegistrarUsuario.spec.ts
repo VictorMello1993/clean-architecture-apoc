@@ -2,8 +2,8 @@ import { BcryptAdapter } from "./../src/app/exemplo/adaptadores/auth/BcryptAdapt
 import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/auth/SenhaComEspacos";
 import { InverterSenha } from "./../src/app/exemplo/adaptadores/auth/InverterSenha";
 import { UsuarioEmMemoria } from "./../src/app/exemplo/adaptadores/db/UsuarioEmMemoria";
-import { RegistrarUsuarioUseCase } from "./../src/app/exemplo/usuario/RegistrarUsuarioUseCase";
-import { IColecaoUsuario } from "../src/app/exemplo/usuario/IColecaoUsuario";
+import { RegistrarUsuarioUseCase } from "../src/app/exemplo/portas/usuario/RegistrarUsuarioUseCase";
+import { IColecaoUsuario } from "../src/app/exemplo/portas/usuario/IColecaoUsuario";
 
 test("Deve ser possível registrar um usuário invertendo a senha", () => {
   const colecao: IColecaoUsuario = new UsuarioEmMemoria();

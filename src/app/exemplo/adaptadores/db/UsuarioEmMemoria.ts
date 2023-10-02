@@ -1,5 +1,5 @@
-import { IColecaoUsuario } from "../../usuario/IColecaoUsuario";
-import { Usuario } from "../../usuario/Usuario";
+import { IColecaoUsuario } from "../../portas/usuario/IColecaoUsuario";
+import { Usuario } from "../../portas/usuario/Usuario";
 
 export class UsuarioEmMemoria implements IColecaoUsuario {
   private static itens: Usuario[] = [];
