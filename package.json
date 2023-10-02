@@ -6,12 +6,16 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc"
+    "build": "tsc",    
+    "migrate:make": "knex migrate:make --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js --knexpath ./src/app/exemplo/adaptadores/db/knex",
+    "migrate:up": "knex migrate:latest --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js",
+    "migrate:down": "knex migrate:rollback --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.3",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
@@ -21,5 +25,12 @@
     "ts-jest": "^29.1.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "knex": "^2.5.1",
+    "pg": "^8.11.3",
+    "tsx": "^3.13.0"
   }
 }

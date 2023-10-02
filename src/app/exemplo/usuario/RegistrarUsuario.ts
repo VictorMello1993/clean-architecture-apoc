@@ -1,6 +1,7 @@
 import { InverterSenha } from "../adaptadores/auth/InverterSenha";
 import { IColecao } from "../portas/IColecao";
 import { ICriptografiaProvider } from "../portas/ICriptografiaProvider";
+import { Usuario } from "./Usuario";
 
 export class RegistrarUsuarioUseCase {
   private inverterSenha = new InverterSenha();
@@ -12,13 +13,13 @@ export class RegistrarUsuarioUseCase {
   ) {}
 
   executar(nome: string, email: string, senha: string) {
-    const senhaFake = this.criptografiaProvider.criptografar(senha);
+    const senhaCriptografada = this.criptografiaProvider.criptografar(senha);
 
-    const usuario = {
-      id: Math.random(),
+    const usuario: Usuario = {
+      id: `${Math.random()}`,
       nome,
       email,
-      senha: senhaFake
+      senha: senhaCriptografada
     };
 
     this.colecao.inserir(usuario);
