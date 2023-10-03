@@ -1,18 +1,14 @@
 const dotenv = require("dotenv");
-const config = dotenv.config({
-  path: "../../../../../../.env"
-});
+dotenv.config({ path: ".env" });
 
 module.exports = {
   client: "pg",
-  // connection: process.env.PG_CONNECTION_STRING,
   connection: {
-    connectionString: config.DATABASE_URL,
-    host: String(config.DB_HOST),
-    port: Number(config.DB_PORT),
-    user: String(config.DB_USER),
-    database: String(config.DB_NAME),
-    password: String(config.DB_PASSWORD)
+    host: "127.0.0.1",
+    port: 5432,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
   },
   migrations: {
     tableName: "knex_migrations"
