@@ -13,7 +13,7 @@ export class RegistrarUsuarioUseCase {
     private criptografiaProvider: ICriptografiaProvider
   ) {}
 
-  executar(nome: string, email: string, senha: string) {
+  async executar(nome: string, email: string, senha: string) {
     const senhaCriptografada = this.criptografiaProvider.criptografar(senha);
 
     const usuario: Usuario = {
@@ -23,7 +23,7 @@ export class RegistrarUsuarioUseCase {
       senha: senhaCriptografada
     };
 
-    this.colecao.inserir(usuario);
+    await this.colecao.inserir(usuario);
 
     return usuario;
   }
