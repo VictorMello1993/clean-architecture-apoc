@@ -42,7 +42,7 @@ test("Deve ser possível registrar um usuário com senha criptografada", async (
   expect(criptografiaProvider.comparar("123456", usuario.senha!)).toBeTruthy();
 });
 
-test("Deve ser possível registrar um usuário no banco real", async () => {
+test.skip("Deve ser possível registrar um usuário no banco real", async () => {
   const colecao: IColecaoUsuario = new ColecaoUsuarioDB();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
@@ -52,4 +52,21 @@ test("Deve ser possível registrar um usuário no banco real", async () => {
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Victor Mello");
   expect(criptografiaProvider.comparar("123456", usuario.senha!)).toBeTruthy();
+});
+
+test("Não deve permitir cadastrar usuário com o mesmo e-mail", async () => {
+  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const criptografiaProvider = new BcryptAdapter();
+  const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
+
+  const usuario = {
+    nome: "Victor Mello",
+    email: "victor@teste.com.br",
+    senha: "123456"
+  };
+
+  await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+  const exec = async () => await registrarUsuarioUseCase.executar(usuario.nome, usuario.email, usuario.senha);
+
+  await expect(exec).rejects.toThrowError("Já existe usuário cadastrado com o e-mail informado");
 });

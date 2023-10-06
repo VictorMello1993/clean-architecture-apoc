@@ -15,6 +15,11 @@ export class RegistrarUsuarioUseCase {
 
   async executar(nome: string, email: string, senha: string) {
     const senhaCriptografada = this.criptografiaProvider.criptografar(senha);
+    const usuarioExiste = await this.colecao.buscarPorEmail(email);
+
+    if (usuarioExiste) {
+      throw new Error("Já existe usuário cadastrado com o e-mail informado");
+    }
 
     const usuario: Usuario = {
       id: BaseId.gerar(),
