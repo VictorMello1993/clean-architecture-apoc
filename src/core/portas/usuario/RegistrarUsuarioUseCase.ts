@@ -1,5 +1,5 @@
-import { BaseId } from "../../../shared/BaseId";
-import { InverterSenha } from "../../adaptadores/auth/InverterSenha";
+import { InverterSenha } from "@adaptadores/auth/InverterSenha";
+import { BaseId } from "@core/shared/BaseId";
 import { IColecaoUsuario } from "./IColecaoUsuario";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
 import { Usuario } from "./Usuario";

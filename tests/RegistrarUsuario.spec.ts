@@ -1,13 +1,12 @@
-import { ColecaoUsuarioDB } from "./../src/app/exemplo/adaptadores/db/knex/ColecaoUsuarioDB";
-import { BcryptAdapter } from "./../src/app/exemplo/adaptadores/auth/BcryptAdapter";
-import { SenhaComEspacos } from "./../src/app/exemplo/adaptadores/auth/SenhaComEspacos";
-import { InverterSenha } from "./../src/app/exemplo/adaptadores/auth/InverterSenha";
-import { UsuarioEmMemoria } from "./../src/app/exemplo/adaptadores/db/UsuarioEmMemoria";
-import { RegistrarUsuarioUseCase } from "../src/app/exemplo/portas/usuario/RegistrarUsuarioUseCase";
-import { IColecaoUsuario } from "../src/app/exemplo/portas/usuario/IColecaoUsuario";
+import { BcryptAdapter } from "@adaptadores/auth/BcryptAdapter";
+import { SenhaComEspacos } from "@adaptadores/auth/SenhaComEspacos";
+import { IColecaoUsuario } from "@core/portas/usuario/IColecaoUsuario";
+import { InverterSenha } from "@adaptadores/auth/InverterSenha";
+import { ColecaoUsuarioEmMemoria } from "@adaptadores/db/ColecaoUsuarioEmMemoria";
+import { RegistrarUsuarioUseCase } from "@core/portas/usuario/RegistrarUsuarioUseCase";
 
 test("Deve ser possível registrar um usuário invertendo a senha", async() => {
-  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new InverterSenha();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -19,7 +18,7 @@ test("Deve ser possível registrar um usuário invertendo a senha", async() => {
 });
 
 test("Deve ser possível registrar um usuário com senha com espaços", async () => {
-  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new SenhaComEspacos();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -31,7 +30,7 @@ test("Deve ser possível registrar um usuário com senha com espaços", async ()
 });
 
 test("Deve ser possível registrar um usuário com senha criptografada", async () => {
-  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -43,7 +42,7 @@ test("Deve ser possível registrar um usuário com senha criptografada", async (
 });
 
 test.skip("Deve ser possível registrar um usuário no banco real", async () => {
-  const colecao: IColecaoUsuario = new ColecaoUsuarioDB();
+  const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
@@ -55,7 +54,7 @@ test.skip("Deve ser possível registrar um usuário no banco real", async () => 
 });
 
 test("Não deve permitir cadastrar usuário com o mesmo e-mail", async () => {
-  const colecao: IColecaoUsuario = new UsuarioEmMemoria();
+  const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 

@@ -1,4 +1,4 @@
-import { ICriptografiaProvider } from "../../portas/usuario/ICriptografiaProvider";
+import { ICriptografiaProvider } from "@core/portas/usuario/ICriptografiaProvider";
 
 export class InverterSenha implements ICriptografiaProvider {
   criptografar(senha: string): string {

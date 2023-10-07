@@ -1,5 +1,5 @@
-import { IColecaoUsuario } from "../../../portas/usuario/IColecaoUsuario";
-import { Usuario } from "../../../portas/usuario/Usuario";
+import { IColecaoUsuario } from "@core/portas/usuario/IColecaoUsuario";
+import { Usuario } from "@core/portas/usuario/Usuario";
 import conexao from "./conexao";
 
 export class ColecaoUsuarioDB implements IColecaoUsuario {

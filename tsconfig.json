@@ -8,6 +8,12 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "allowJs": true,
-  },
-  "include": ["src/**/*"]
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["./src/core/*"],
+      "@adaptadores/*": ["./src/adaptadores/*"],
+      "@portas/*": ["./src/core/portas/*"],
+      "@src/*": [".src/*"]
+    },
+  }  
 }

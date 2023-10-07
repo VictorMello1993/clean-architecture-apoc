@@ -1,7 +1,7 @@
-import { IColecaoUsuario } from "../../portas/usuario/IColecaoUsuario";
-import { Usuario } from "../../portas/usuario/Usuario";
+import { IColecaoUsuario } from "@core/portas/usuario/IColecaoUsuario";
+import { Usuario } from "@core/portas/usuario/Usuario";
 
-export class UsuarioEmMemoria implements IColecaoUsuario {
+export class ColecaoUsuarioEmMemoria implements IColecaoUsuario {
   private itens: Usuario[] = [];
   async inserir(usuario: Usuario): Promise<void> {
     this.itens.push(usuario);

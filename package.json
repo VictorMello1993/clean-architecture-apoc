@@ -5,26 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --respawn -r tsconfig-paths/register --transpile-only src/index.ts",
     "build": "tsc",
-    "migrate:make": "knex migrate:make --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js --knexpath ./src/app/exemplo/adaptadores/db/knex",
-    "migrate:up": "knex migrate:latest --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js",
-    "migrate:down": "knex migrate:rollback --knexfile ./src/app/exemplo/adaptadores/db/knex/knexfile.js"
+    "migrate:make": "knex migrate:make --knexfile src/adaptadores/db/knex/knexfile.js --knexpath src/adaptadores/db/knex/",
+    "migrate:up": "knex migrate:latest --knexfile src/adaptadores/db/knex/knexfile.js",
+    "migrate:down": "knex migrate:rollback --knexfile src/adaptadores/db/knex/knexfile.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^29.5.5",
     "@types/uuid": "^9.0.4",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "eslint": "^8.46.0",
     "eslint-config-standard": "^17.1.0",
-    "jest": "^29.6.2",
+    "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {

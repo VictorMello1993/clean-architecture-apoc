@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { ICriptografiaProvider } from "../../portas/usuario/ICriptografiaProvider";
+import { ICriptografiaProvider } from "@core/portas/usuario/ICriptografiaProvider";
 
 export class BcryptAdapter implements ICriptografiaProvider {
   criptografar(senha: string): string {
