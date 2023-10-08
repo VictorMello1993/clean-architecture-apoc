@@ -9,6 +9,7 @@
       "space-before-function-paren": "off",
       "camelcase": "off",
       "no-useless-constructor": "off",
-      "no-undef": "off"
+      "no-undef": "off",
+      "no-new": "warn"
     }
   }

@@ -1,4 +1,4 @@
-import { InverterSenha } from "@adaptadores/auth/InverterSenha";
+import { InverterSenha } from "@adapters/auth/InverterSenha";
 import { BaseId } from "@core/shared/BaseId";
 import { IColecaoUsuario } from "./IColecaoUsuario";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
