@@ -4,6 +4,8 @@ import { ColecaoUsuarioDB } from "@adapters/db/knex/ColecaoUsuarioDB";
 import { BcryptAdapter } from "@adapters/auth/BcryptAdapter";
 import { RegistrarUsuarioUseCase } from "@core/ports/usuario/RegistrarUsuarioUseCase";
 import { RegistrarUsuarioController } from "@controllers/RegistrarUsuarioController";
+import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
+import { AutenticacaoController } from "@controllers/AutenticacaoController";
 
 export const app = express();
 
@@ -21,7 +23,10 @@ app.listen(porta, () => console.log(`Server is running at port ${porta}...`));
 const colecaoUsuario = new ColecaoUsuarioDB();
 const criptografiaProvider = new BcryptAdapter();
 const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecaoUsuario, criptografiaProvider);
+const loginUseCase = new LoginUseCase(colecaoUsuario, criptografiaProvider);
+
 new RegistrarUsuarioController(app, registrarUsuarioUseCase);
+new AutenticacaoController(app, loginUseCase);
 
 // usuariosRouter.post("/registrar", registrarUsuarioController.handle);
 

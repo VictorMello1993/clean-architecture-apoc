@@ -1,5 +1,5 @@
-import { IColecaoUsuario } from "@core/portas/usuario/IColecaoUsuario";
-import { Usuario } from "@core/portas/usuario/Usuario";
+import { IColecaoUsuario } from "@core/ports/usuario/IColecaoUsuario";
+import { Usuario } from "@core/ports/usuario/Usuario";
 
 export class ColecaoUsuarioEmMemoria implements IColecaoUsuario {
   private itens: Usuario[] = [];
