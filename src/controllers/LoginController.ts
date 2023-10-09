@@ -1,7 +1,7 @@
 import { Express, Request, Response } from "express";
 import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
 
-export class AutenticacaoController {
+export class LoginController {
   constructor(
     private servidor: Express,
     private loginUseCase: LoginUseCase
@@ -11,9 +11,9 @@ export class AutenticacaoController {
         const { email, senha } = req.body;
         const token = await this.loginUseCase.executar(email, senha);
 
-        res.status(201).send({ token });
+        res.status(200).json({ token });
       } catch (err: any) {
-        res.status(400).send(err.message);
+        res.status(403).send(err.message);
       }
     });
   }

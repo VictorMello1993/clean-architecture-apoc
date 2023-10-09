@@ -5,7 +5,7 @@ import { BcryptAdapter } from "@adapters/auth/BcryptAdapter";
 import { RegistrarUsuarioUseCase } from "@core/ports/usuario/RegistrarUsuarioUseCase";
 import { RegistrarUsuarioController } from "@controllers/RegistrarUsuarioController";
 import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
-import { AutenticacaoController } from "@controllers/AutenticacaoController";
+import { LoginController } from "@controllers/LoginController";
 
 export const app = express();
 
@@ -26,7 +26,7 @@ const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecaoUsuario, crip
 const loginUseCase = new LoginUseCase(colecaoUsuario, criptografiaProvider);
 
 new RegistrarUsuarioController(app, registrarUsuarioUseCase);
-new AutenticacaoController(app, loginUseCase);
+new LoginController(app, loginUseCase);
 
 // usuariosRouter.post("/registrar", registrarUsuarioController.handle);
 
