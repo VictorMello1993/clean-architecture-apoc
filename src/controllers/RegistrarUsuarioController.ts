@@ -9,7 +9,7 @@ export class RegistrarUsuarioController {
     servidor.post("/usuarios/registrar", async (req: Request, res: Response) => {
       try {
         const { nome, email, senha } = req.body;
-        await this.registrarUsuarioUseCase.executar(nome, email, senha);
+        await this.registrarUsuarioUseCase.executar({ nome, email, senha });
 
         res.status(201).send();
       } catch (err: any) {

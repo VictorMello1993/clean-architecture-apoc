@@ -10,8 +10,8 @@ test("Um usuário deve possuir uma conta para efetuar login", async () => {
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
   const loginUseCase = new LoginUseCase(colecao, criptografiaProvider);
 
-  const usuario = await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
-  await loginUseCase.executar("victor@teste.com.br", "123456");
+  const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
+  await loginUseCase.executar({ email: "victor@teste.com.br", senha: "123456" });
 
   expect(criptografiaProvider.comparar("123456", usuario.senha!)).toBeTruthy();
 });
@@ -22,8 +22,8 @@ test("Deve ser possível efetuar login com a conta existente", async () => {
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
   const loginUseCase = new LoginUseCase(colecao, criptografiaProvider);
 
-  await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
-  const token = await loginUseCase.executar("victor@teste.com.br", "123456");
+  await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
+  const token = await loginUseCase.executar({ email: "victor@teste.com.br", senha: "123456" });
 
   expect(token).toHaveProperty("token");
 });

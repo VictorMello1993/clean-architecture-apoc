@@ -9,7 +9,7 @@ export class LoginController {
     servidor.post("/usuarios/login", async (req: Request, res: Response) => {
       try {
         const { email, senha } = req.body;
-        const token = await this.loginUseCase.executar(email, senha);
+        const token = await this.loginUseCase.executar({ email, senha });
 
         res.status(200).json({ token });
       } catch (err: any) {

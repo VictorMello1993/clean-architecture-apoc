@@ -9,7 +9,7 @@ test("Deve ser possível registrar um usuário invertendo a senha", async() => {
   const criptografiaProvider = new InverterSenha();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
-  const usuario = await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+  const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Victor Mello");
@@ -21,7 +21,7 @@ test("Deve ser possível registrar um usuário com senha com espaços", async ()
   const criptografiaProvider = new SenhaComEspacos();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
-  const usuario = await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+  const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Victor Mello");
@@ -33,7 +33,7 @@ test("Deve ser possível registrar um usuário com senha criptografada", async (
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
-  const usuario = await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+  const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Victor Mello");
@@ -45,7 +45,7 @@ test.skip("Deve ser possível registrar um usuário no banco real", async () => 
   const criptografiaProvider = new BcryptAdapter();
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
 
-  const usuario = await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
+  const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Victor Mello");
@@ -63,8 +63,8 @@ test("Não deve permitir cadastrar usuário com o mesmo e-mail", async () => {
     senha: "123456"
   };
 
-  await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
-  const exec = async () => await registrarUsuarioUseCase.executar(usuario.nome, usuario.email, usuario.senha);
+  await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
+  const exec = async () => await registrarUsuarioUseCase.executar({ nome: usuario.nome, email: usuario.email, senha: usuario.senha });
 
   await expect(exec).rejects.toThrowError("Já existe usuário cadastrado com o e-mail informado");
 });
