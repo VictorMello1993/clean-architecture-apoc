@@ -30,6 +30,6 @@ export class LoginUseCase {
       expiresIn: "4h"
     });
 
-    return token;
+    return { token };
   }
 }

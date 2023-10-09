@@ -25,6 +25,5 @@ test("Deve ser possível efetuar login com a conta existente", async () => {
   await registrarUsuarioUseCase.executar("Victor Mello", "victor@teste.com.br", "123456");
   const token = await loginUseCase.executar("victor@teste.com.br", "123456");
 
-  expect(token).not.toBeNull();
-  expect(token).not.toBeUndefined();
+  expect(token).toHaveProperty("token");
 });
