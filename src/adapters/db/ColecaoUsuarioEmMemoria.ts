@@ -11,4 +11,9 @@ export class ColecaoUsuarioEmMemoria implements IColecaoUsuario {
     const usuario = this.itens.find(usuario => usuario.email === email);
     return usuario ?? null;
   }
+
+  async buscarPorId(id: string): Promise<Usuario | null> {
+    const usuario = this.itens.find(usuario => usuario.id === id);
+    return usuario ?? null;
+  }
 }
