@@ -1,17 +1,11 @@
 import axios from "axios";
-import { Usuario } from "@ports/usuario/Usuario";
+import usuarios from "../data/usuarios";
 
 const baseUrl = process.env.API_URL;
 
-const usuario: Partial<Usuario> = {
-  nome: "Fulano de tal",
-  email: "emaildofulano@teste.com",
-  senha: "123456"
-};
-
 test("Deve registrar um novo usuário se não existir", async () => {
   try {
-    const response = await axios.post(`${baseUrl}/usuarios/registrar`, usuario);
+    const response = await axios.post(`${baseUrl}/usuarios/registrar`, usuarios.completo);
     expect(response.status).toBe(201);
   } catch (error: any) {
     expect(error.response.status).toBe(400);
@@ -21,7 +15,7 @@ test("Deve registrar um novo usuário se não existir", async () => {
 
 test("Deve ser possível efetuar login com e-mail e senha válidos", async () => {
   try {
-    const response = await axios.post(`${baseUrl}/usuarios/login`, usuario);
+    const response = await axios.post(`${baseUrl}/usuarios/login`, usuarios.completo);
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty("token");
   } catch (error: any) {

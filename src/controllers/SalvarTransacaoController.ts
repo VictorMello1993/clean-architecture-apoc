@@ -4,7 +4,8 @@ import { SalvarTransacaoUseCase } from "@core/ports/transacao/SalvarTransacaoUse
 export class SalvarTransacaoController {
   constructor(
     private servidor: Express,
-    private salvarTransacaoUseCase: SalvarTransacaoUseCase
+    private salvarTransacaoUseCase: SalvarTransacaoUseCase,
+    ...middlewares: any[]
   ) {
     const fn = async(req: Request, res: Response) => {
       try {
@@ -14,6 +15,6 @@ export class SalvarTransacaoController {
         res.status(400).send(err.message);
       }
     };
-    servidor.post("/transacoes", fn);
+    servidor.post("/transacoes", middlewares, fn);
   }
 }

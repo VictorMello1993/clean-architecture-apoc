@@ -9,6 +9,7 @@ import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
 import { LoginController } from "@controllers/LoginController";
 import { JwtAdapter } from "./adapters/auth/JwtAdapter";
 import { SalvarTransacaoController } from "./controllers/SalvarTransacaoController";
+import { TokenValidoMiddleware } from "./controllers/middlewares/TokenValidoMiddleware";
 
 export const app = express();
 
@@ -31,4 +32,5 @@ new LoginController(app, loginUseCase);
 
 // Rotas autenticadas-------------------------------------------------------------------------------------
 const salvarTransacaoUseCase = new SalvarTransacaoUseCase();
-new SalvarTransacaoController(app, salvarTransacaoUseCase);
+const tokenValidoMiddleware = TokenValidoMiddleware(colecaoUsuario, tokenProvider);
+new SalvarTransacaoController(app, salvarTransacaoUseCase, tokenValidoMiddleware);
