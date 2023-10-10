@@ -1,7 +1,7 @@
-import { IUseCase } from "../../shared/IUseCase";
+import { IUseCase } from "@core/shared/IUseCase";
 import { IColecaoUsuario } from "./IColecaoUsuario";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
-import jwt from "jsonwebtoken";
+import { ITokenProvider } from "./ITokenProvider";
 
 const MSG_EMAIL_OU_SENHA_INVALIDA = "E-mail ou senha inválidos";
 
@@ -11,7 +11,8 @@ type Saida = {token: string}
 export class LoginUseCase implements IUseCase<Entrada, Saida> {
   constructor(
     private colecaoUsuario: IColecaoUsuario,
-    private criptografiaProvider: ICriptografiaProvider
+    private criptografiaProvider: ICriptografiaProvider,
+    private tokenProvider: ITokenProvider
   ) {}
 
   async executar(dto: Entrada) {
@@ -27,12 +28,7 @@ export class LoginUseCase implements IUseCase<Entrada, Saida> {
       throw new Error(MSG_EMAIL_OU_SENHA_INVALIDA);
     }
 
-    const secret_key = process.env.SECRET_KEY;
-
-    const token = jwt.sign({}, secret_key as string, {
-      subject: usuario.id,
-      expiresIn: "4h"
-    });
+    const token = this.tokenProvider.gerar({ id: usuario.id, nome: usuario.nome });
 
     return { token };
   }

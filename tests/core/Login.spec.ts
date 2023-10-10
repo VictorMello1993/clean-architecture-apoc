@@ -3,12 +3,15 @@ import { ColecaoUsuarioEmMemoria } from "@adapters/db/ColecaoUsuarioEmMemoria";
 import { IColecaoUsuario } from "@core/ports/usuario/IColecaoUsuario";
 import { RegistrarUsuarioUseCase } from "@core/ports/usuario/RegistrarUsuarioUseCase";
 import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
+import { JwtAdapter } from "@adapters/auth/JwtAdapter";
 
 test("Um usuário deve possuir uma conta para efetuar login", async () => {
   const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
+  const tokenProvider = new JwtAdapter(process.env.SECRET_KEY as string);
+
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
-  const loginUseCase = new LoginUseCase(colecao, criptografiaProvider);
+  const loginUseCase = new LoginUseCase(colecao, criptografiaProvider, tokenProvider);
 
   const usuario = await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
   await loginUseCase.executar({ email: "victor@teste.com.br", senha: "123456" });
@@ -19,8 +22,10 @@ test("Um usuário deve possuir uma conta para efetuar login", async () => {
 test("Deve ser possível efetuar login com a conta existente", async () => {
   const colecao: IColecaoUsuario = new ColecaoUsuarioEmMemoria();
   const criptografiaProvider = new BcryptAdapter();
+  const tokenProvider = new JwtAdapter(process.env.SECRET_KEY as string);
+
   const registrarUsuarioUseCase = new RegistrarUsuarioUseCase(colecao, criptografiaProvider);
-  const loginUseCase = new LoginUseCase(colecao, criptografiaProvider);
+  const loginUseCase = new LoginUseCase(colecao, criptografiaProvider, tokenProvider);
 
   await registrarUsuarioUseCase.executar({ nome: "Victor Mello", email: "victor@teste.com.br", senha: "123456" });
   const token = await loginUseCase.executar({ email: "victor@teste.com.br", senha: "123456" });
