@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { SalvarTransacaoUseCase } from "@core/ports/transacao/SalvarTransacaoUseCase";
 import express from "express";
 import { ColecaoUsuarioDB } from "@adapters/db/knex/ColecaoUsuarioDB";
 import { BcryptAdapter } from "@adapters/auth/BcryptAdapter";
@@ -7,6 +8,7 @@ import { RegistrarUsuarioController } from "@controllers/RegistrarUsuarioControl
 import { LoginUseCase } from "@core/ports/usuario/LoginUseCase";
 import { LoginController } from "@controllers/LoginController";
 import { JwtAdapter } from "./adapters/auth/JwtAdapter";
+import { SalvarTransacaoController } from "./controllers/SalvarTransacaoController";
 
 export const app = express();
 
@@ -28,3 +30,5 @@ new RegistrarUsuarioController(app, registrarUsuarioUseCase);
 new LoginController(app, loginUseCase);
 
 // Rotas autenticadas-------------------------------------------------------------------------------------
+const salvarTransacaoUseCase = new SalvarTransacaoUseCase();
+new SalvarTransacaoController(app, salvarTransacaoUseCase);
