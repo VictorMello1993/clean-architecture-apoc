@@ -1,4 +1,4 @@
-import { IColecaoUsuario } from "@core/ports/usuario/IColecaoUsuario";
+import { IUsuarioRepository } from "@core/ports/usuario/IUsuarioRepository";
 import { Usuario } from "@core/ports/usuario/Usuario";
 
 export class ColecaoUsuarioEmMemoria implements IColecaoUsuario {

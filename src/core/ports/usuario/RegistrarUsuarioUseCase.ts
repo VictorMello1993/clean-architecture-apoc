@@ -1,6 +1,6 @@
 import { InverterSenha } from "@adapters/auth/InverterSenha";
 import { BaseId } from "@core/shared/BaseId";
-import { IColecaoUsuario } from "./IColecaoUsuario";
+import { IUsuarioRepository } from "./IUsuarioRepository";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
 import { Usuario } from "./Usuario";
 import { IUseCase } from "../../shared/IUseCase";
@@ -12,13 +12,13 @@ export class RegistrarUsuarioUseCase implements IUseCase<Entrada, Usuario> {
 
   constructor(
     // Aqui descrevem o conceito de porta na Arquitetura Hexagonal
-    private colecao: IColecaoUsuario,
+    private usuarioRepository: IUsuarioRepository,
     private criptografiaProvider: ICriptografiaProvider
   ) {}
 
   async executar(dto: Entrada) {
     const senhaCriptografada = this.criptografiaProvider.criptografar(dto.senha);
-    const usuarioExiste = await this.colecao.buscarPorEmail(dto.email);
+    const usuarioExiste = await this.usuarioRepository.buscarPorEmail(dto.email);
 
     if (usuarioExiste) {
       throw new Error("Já existe usuário cadastrado com o e-mail informado");
@@ -31,7 +31,7 @@ export class RegistrarUsuarioUseCase implements IUseCase<Entrada, Usuario> {
       senha: senhaCriptografada
     };
 
-    await this.colecao.inserir(usuario);
+    await this.usuarioRepository.inserir(usuario);
 
     return usuario;
   }

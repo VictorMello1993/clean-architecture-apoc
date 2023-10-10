@@ -1,8 +1,8 @@
-import { IColecaoUsuario } from "@core/ports/usuario/IColecaoUsuario";
+import { IUsuarioRepository } from "@core/ports/usuario/IUsuarioRepository";
 import { Usuario } from "@core/ports/usuario/Usuario";
 import conexao from "./conexao";
 
-export class ColecaoUsuarioDB implements IColecaoUsuario {
+export class ColecaoUsuarioDB implements IUsuarioRepository {
   async inserir(usuario: Usuario): Promise<void> {
     await conexao.table("usuarios").insert(usuario);
   }

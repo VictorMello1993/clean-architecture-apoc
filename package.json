@@ -7,9 +7,9 @@
     "test": "jest",
     "dev": "ts-node-dev --respawn -r tsconfig-paths/register --transpile-only src/index.ts",
     "build": "tsc",
-    "migrate:make": "knex migrate:make --knexfile src/adaptadores/db/knex/knexfile.js --knexpath src/adaptadores/db/knex/",
-    "migrate:up": "knex migrate:latest --knexfile src/adaptadores/db/knex/knexfile.js",
-    "migrate:down": "knex migrate:rollback --knexfile src/adaptadores/db/knex/knexfile.js"
+    "migrate:make": "knex migrate:make --knexfile src/adapters/db/knex/knexfile.js --knexpath src/adapters/db/knex/",
+    "migrate:up": "knex migrate:latest --knexfile src/adapters/db/knex/knexfile.js",
+    "migrate:down": "knex migrate:rollback --knexfile src/adapters/db/knex/knexfile.js"
   },
   "keywords": [],
   "author": "",

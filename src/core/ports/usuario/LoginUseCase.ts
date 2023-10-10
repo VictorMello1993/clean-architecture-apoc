@@ -1,5 +1,5 @@
 import { IUseCase } from "@core/shared/IUseCase";
-import { IColecaoUsuario } from "./IColecaoUsuario";
+import { IUsuarioRepository } from "./IUsuarioRepository";
 import { ICriptografiaProvider } from "./ICriptografiaProvider";
 import { ITokenProvider } from "./ITokenProvider";
 
@@ -10,7 +10,7 @@ type Saida = {token: string}
 
 export class LoginUseCase implements IUseCase<Entrada, Saida> {
   constructor(
-    private colecaoUsuario: IColecaoUsuario,
+    private colecaoUsuario: IUsuarioRepository,
     private criptografiaProvider: ICriptografiaProvider,
     private tokenProvider: ITokenProvider
   ) {}

@@ -1,10 +1,10 @@
-import { IColecaoUsuario } from "@core/ports/usuario/IColecaoUsuario";
+import { IUsuarioRepository } from "@core/ports/usuario/IUsuarioRepository";
 import { ITokenProvider } from "@core/ports/usuario/ITokenProvider";
 import { NextFunction, Request, Response } from "express";
 import { Usuario } from "@core/ports/usuario/Usuario";
 
 export function TokenValidoMiddleware(
-  colecaoUsuario: IColecaoUsuario,
+  colecaoUsuario: IUsuarioRepository,
   tokenProvider: ITokenProvider
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
