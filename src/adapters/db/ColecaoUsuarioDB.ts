@@ -1,6 +1,6 @@
 import { IUsuarioRepository } from "@core/ports/usuario/IUsuarioRepository";
 import { Usuario } from "@core/ports/usuario/Usuario";
-import conexao from "./conexao";
+import conexao from "./knex/conexao";
 
 export class ColecaoUsuarioDB implements IUsuarioRepository {
   async inserir(usuario: Usuario): Promise<void> {

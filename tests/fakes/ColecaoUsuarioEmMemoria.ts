@@ -1,7 +1,7 @@
 import { IUsuarioRepository } from "@core/ports/usuario/IUsuarioRepository";
 import { Usuario } from "@core/ports/usuario/Usuario";
 
-export class ColecaoUsuarioEmMemoria implements IColecaoUsuario {
+export class ColecaoUsuarioEmMemoria implements IUsuarioRepository {
   private itens: Usuario[] = [];
   async inserir(usuario: Usuario): Promise<void> {
     this.itens.push(usuario);
