@@ -11,14 +11,13 @@ export class ColecaoTransacaoDB implements ITransacaoRepository {
 
   async atualizar(transacao: Transacao): Promise<void> {
     return await conexao
-      .table(this._toTable(transacao))
+      .table("transacoes")
       .where("id", transacao.id)
-      .update({
-        ...transacao,
-        vencimento: transacao.vencimento.toISOString(),
-        usuario_id: transacao.idUsuario
-      });
+      .update(this._toTable(transacao));
   }
+  // ...transacao,
+  // vencimento: transacao.vencimento.toISOString(),
+  // usuario_id: transacao.idUsuario
 
   async buscarPorId(idUsuario: string, id: string): Promise<Transacao | null> {
     const transacoes = await conexao.table("transacoes").where({
