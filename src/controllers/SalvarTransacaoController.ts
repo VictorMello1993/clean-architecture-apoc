@@ -9,12 +9,26 @@ export class SalvarTransacaoController {
   ) {
     const fn = async(req: Request, res: Response) => {
       try {
-        const resultado = await this.salvarTransacaoUseCase.executar();
+        const { descricao, valor, vencimento, idUsuario } = req.body;
+
+        const transacao = {
+          descricao,
+          valor: +valor,
+          vencimento: new Date(vencimento),
+          idUsuario
+        };
+
+        const resultado = await this.salvarTransacaoUseCase.executar({
+          transacao,
+          id: req.params.id,
+          usuario: (req as any).usuario
+        });
         res.status(200).json(resultado);
       } catch (err: any) {
         res.status(400).send(err.message);
       }
     };
     servidor.post("/transacoes", middlewares, fn);
+    servidor.post("/transacoes/:id", middlewares, fn);
   }
 }

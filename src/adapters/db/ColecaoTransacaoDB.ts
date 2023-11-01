@@ -5,12 +5,8 @@ import conexao from "./knex/conexao";
 export class ColecaoTransacaoDB implements ITransacaoRepository {
   async adicionar(transacao: Transacao): Promise<void> {
     return await conexao
-      .table(this._toTable(transacao))
-      .insert({
-        ...transacao,
-        vencimento: transacao.vencimento.toISOString(),
-        usuario_id: transacao.idUsuario
-      });
+      .table("transacoes")
+      .insert(this._toTable(transacao));
   }
 
   async atualizar(transacao: Transacao): Promise<void> {
@@ -46,7 +42,9 @@ export class ColecaoTransacaoDB implements ITransacaoRepository {
 
   private _toTable(transacao: Transacao): any {
     return {
-      ...transacao,
+      id: transacao.id,
+      descricao: transacao.descricao,
+      valor: transacao.valor,
       vencimento: transacao.vencimento.toISOString(),
       usuario_id: transacao.idUsuario
     };
