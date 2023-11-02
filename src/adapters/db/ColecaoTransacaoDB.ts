@@ -29,12 +29,12 @@ export class ColecaoTransacaoDB implements ITransacaoRepository {
     return this._fromTable(transacoes[0]);
   }
 
-  async buscarPorMes(idUsuario: string, ano: number, mes: number): Promise<Transacao[] | null> {
+  async buscarPorMes(idUsuario: string, ano: number, mes: number): Promise<Transacao[]> {
     const transacoes = await conexao
       .table("transacoes")
       .where("usuario_id", idUsuario)
-      .whereRaw("extract(year from vencimento) = ?", ano)
-      .whereRaw("extract(month from vencimento) = ?", mes);
+      .whereRaw("extract(year from cast(vencimento as date)) = ?", ano)
+      .whereRaw("extract(month from cast(vencimento as date)) = ?", mes);
 
     return transacoes.map(this._fromTable);
   }

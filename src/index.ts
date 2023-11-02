@@ -11,6 +11,8 @@ import { SalvarTransacaoController } from "@controllers/SalvarTransacaoControlle
 import { TokenValidoMiddleware } from "@controllers/middlewares/TokenValidoMiddleware";
 import { ColecaoTransacaoDB } from "@adapters/db/ColecaoTransacaoDB";
 import { ColecaoUsuarioDB } from "@adapters/db/ColecaoUsuarioDB";
+import { ExtratoMensalUseCase } from "./core/ports/transacao/ExtratoMensalUseCase";
+import { ObterExtratoMensalController } from "./controllers/ObterExtratoMensalController";
 
 export const app = express();
 
@@ -34,5 +36,7 @@ new LoginController(app, loginUseCase);
 
 // Rotas autenticadas-------------------------------------------------------------------------------------
 const salvarTransacaoUseCase = new SalvarTransacaoUseCase(colecaoTransacao);
+const extratoMensalUseCase = new ExtratoMensalUseCase(colecaoTransacao);
 const tokenValidoMiddleware = TokenValidoMiddleware(colecaoUsuario, tokenProvider);
 new SalvarTransacaoController(app, salvarTransacaoUseCase, tokenValidoMiddleware);
+new ObterExtratoMensalController(app, extratoMensalUseCase, tokenValidoMiddleware);

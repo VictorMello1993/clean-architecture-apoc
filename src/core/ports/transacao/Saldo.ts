@@ -34,6 +34,6 @@ export class Saldo {
   }
 
   private _totalizar(total: number, transacao: Transacao) {
-    return total + transacao.valor;
+    return total + +transacao.valor;
   }
 }

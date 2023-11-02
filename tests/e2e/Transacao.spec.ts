@@ -33,3 +33,33 @@ test("Deve ser possível editar uma transação", async () => {
     expect(error.response.status).toBe(400);
   }
 });
+
+test("Deve popular uma lista de transações", async () => {
+  try {
+    const headers = await getAuthorizationHeaders();
+    const responses = transacao.lista.map(async transacao => {
+      const response = await axios.post(`${baseUrl}/transacoes`, transacao, headers);
+      return response.status;
+    });
+
+    const listaReponseStatus = await Promise.all(responses);
+    expect(listaReponseStatus.every(status => status === 200)).toBe(true);
+  } catch (error: any) {
+    console.log(error.response.data);
+    expect(error.response.status).toBe(400);
+  }
+});
+
+test("Deve obter um extrato mensal + saldo consolidado", async () => {
+  try {
+    const headers = await getAuthorizationHeaders();
+    const response = await axios.get(`${baseUrl}/extrato/2023/10`, headers);
+    console.log(response.data);
+    expect(response.status).toBe(200);
+    expect(response.data).toHaveProperty("transacoes");
+    expect(response.data).toHaveProperty("saldo");
+  } catch (error: any) {
+    console.log(error.response.data);
+    expect(error.response.status).toBe(400);
+  }
+});
